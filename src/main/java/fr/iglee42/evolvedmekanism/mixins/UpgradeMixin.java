@@ -3,26 +3,23 @@ package fr.iglee42.evolvedmekanism.mixins;
 
 import fr.iglee42.evolvedmekanism.EvolvedMekanismLang;
 import fr.iglee42.evolvedmekanism.registries.EMUpgrades;
-import fr.iglee42.evolvedmekanism.tiers.EMAlloyTier;
-import fr.iglee42.evolvedmekanism.tiers.EMBaseTier;
 import mekanism.api.Upgrade;
 import mekanism.api.text.APILang;
 import mekanism.api.text.EnumColor;
-import mekanism.api.tier.AlloyTier;
-import mekanism.api.tier.BaseTier;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @Mixin(value = Upgrade.class,remap = false)
 public class UpgradeMixin {
-    @Shadow
+    // Synthetic enum field is unavailable to the source-level annotation processor.
+    @SuppressWarnings("target")
+    @Shadow(remap = false)
     @Final
     @Mutable
     private static Upgrade[] $VALUES;
@@ -42,19 +39,9 @@ public class UpgradeMixin {
         EMUpgrades.LUNAR_UPGRADE = evolvedmekanism$addVariant("LUNAR", "lunar", EvolvedMekanismLang.UPGRADE_LUNAR,EvolvedMekanismLang.UPGRADE_LUNAR_DESCRIPTION,4, EnumColor.INDIGO);
 
         UPGRADES = $VALUES;
-        evolvedmekanism$refreshUpgradeList();
-    }
-
-    @Unique
-    private static void evolvedmekanism$refreshUpgradeList() {
-        try {
-            Class<?> utils = Class.forName("mekanism.common.util.EnumUtils");
-            Field upgrades = utils.getDeclaredField("UPGRADES");
-            upgrades.setAccessible(true);
-            upgrades.set(null, Arrays.copyOf($VALUES, $VALUES.length));
-        } catch (ReflectiveOperationException e) {
-            throw new ExceptionInInitializerError(e);
-        }
+        // Do not initialize EnumUtils here: another loading thread may own its
+        // initialization lock while waiting for Upgrade to finish. EnumUtilsMixin
+        // refreshes its cache from Upgrade.values() at its own <clinit> tail.
     }
 
     @Unique
