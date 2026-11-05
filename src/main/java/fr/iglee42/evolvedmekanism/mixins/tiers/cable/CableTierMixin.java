@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 @Mixin(value = CableTier.class,remap = false)
 public class CableTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

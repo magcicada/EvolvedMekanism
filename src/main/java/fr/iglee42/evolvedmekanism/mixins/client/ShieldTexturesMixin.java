@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 @Mixin(value = ShieldTextures.class,remap = false)
 public class ShieldTexturesMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

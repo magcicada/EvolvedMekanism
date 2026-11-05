@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 @Mixin(value = APILang.class,remap = false)
 public class APILangMixin {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

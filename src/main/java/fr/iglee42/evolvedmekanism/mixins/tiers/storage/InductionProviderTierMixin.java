@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 @Mixin(value = InductionProviderTier.class,remap = false)
 public class InductionProviderTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

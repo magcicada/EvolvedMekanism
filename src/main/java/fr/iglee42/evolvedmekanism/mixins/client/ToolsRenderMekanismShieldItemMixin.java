@@ -32,7 +32,7 @@ import java.util.List;
 public class ToolsRenderMekanismShieldItemMixin {
 
 
-    @Shadow private ShieldModel shieldModel;
+    @Shadow(remap = false) private ShieldModel shieldModel;
 
     @Inject(method = "renderByItem", at = @At("HEAD"),cancellable = true)
     private void em$changeForEmShields(ItemStack stack, ItemDisplayContext displayContext, PoseStack matrix, MultiBufferSource renderer, int light, int overlayLight, CallbackInfo ci){

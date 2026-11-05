@@ -27,7 +27,7 @@ import java.util.List;
 @Mixin(ItemBlockUniversalCable.class)
 public abstract class ItemBlockUniversalCableMixin {
 
-    @Shadow public abstract @NotNull CableTier getTier();
+    @Shadow(remap = false) public abstract @NotNull CableTier getTier();
 
     @Inject(method = "appendHoverText",at = @At("HEAD"),cancellable = true)
     private void evolvedmekanism$changeForCreative(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag, CallbackInfo ci){

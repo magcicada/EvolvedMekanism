@@ -27,7 +27,7 @@ import java.util.List;
 @Mixin(ItemBlockPressurizedTube.class)
 public abstract class ItemBlockPressurizedTubeMixin {
 
-    @Shadow public abstract @NotNull TubeTier getTier();
+    @Shadow(remap = false) public abstract @NotNull TubeTier getTier();
 
     @Inject(method = "appendHoverText",at = @At("HEAD"),cancellable = true)
     private void evolvedmekanism$changeForCreative(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag, CallbackInfo ci){

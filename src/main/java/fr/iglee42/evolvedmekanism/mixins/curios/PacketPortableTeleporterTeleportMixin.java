@@ -4,17 +4,23 @@ import fr.iglee42.evolvedmekanism.curios.CuriosHelper;
 import mekanism.common.item.ItemPortableTeleporter;
 import mekanism.common.network.to_server.PacketPortableTeleporterTeleport;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(PacketPortableTeleporterTeleport.class)
+// Run after Mekanism Curios' default-priority redirect. Modify the stored
+// result, not the hand lookup invocation which it owns.
+@Mixin(value = PacketPortableTeleporterTeleport.class, remap = false, priority = 900)
 public class PacketPortableTeleporterTeleportMixin {
 
-    @Redirect(method = "handle", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"))
-    private ItemStack evolvedmekanism$fromCurios(ServerPlayer player, InteractionHand hand) {
-        return CuriosHelper.resolveFromHandOrCurio(player, hand, stack -> stack.getItem() instanceof ItemPortableTeleporter);
+    @ModifyVariable(method = "handle(Lnet/minecraftforge/network/NetworkEvent$Context;)V",
+            at = @At("STORE"), ordinal = 0, require = 1, remap = false)
+    private ItemStack evolvedmekanism$resolvePacketItem(ItemStack selected, NetworkEvent.Context context) {
+        ServerPlayer player = context.getSender();
+        if (player == null) return selected;
+        return CuriosHelper.resolvePacketItem(player, selected,
+                stack -> stack.getItem() instanceof ItemPortableTeleporter);
     }
 }

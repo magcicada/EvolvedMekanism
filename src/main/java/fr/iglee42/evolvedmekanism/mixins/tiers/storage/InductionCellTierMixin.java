@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 @Mixin(value = InductionCellTier.class,remap = false)
 public abstract class InductionCellTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

@@ -21,6 +21,7 @@ import java.util.function.Supplier;
 
 @Mixin(value = FactoryType.class,remap = false)
 public class FactoryTypeMixin {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

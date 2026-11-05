@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 @Mixin(value = TubeTier.class,remap = false)
 public class TubeTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable
