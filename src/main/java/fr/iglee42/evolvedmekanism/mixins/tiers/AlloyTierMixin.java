@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 @Mixin(value = AlloyTier.class,remap = false)
 public class AlloyTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

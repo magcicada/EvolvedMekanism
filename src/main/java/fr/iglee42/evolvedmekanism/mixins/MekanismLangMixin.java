@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 @Mixin(value = MekanismLang.class,remap = false)
 public class MekanismLangMixin {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

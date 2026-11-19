@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 @Mixin(value = EnergyCubeTier.class,remap = false)
 public class EnergyCubeTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

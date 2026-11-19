@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 @Mixin(value = FactoryTier.class,remap = false)
 public class FactoryTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

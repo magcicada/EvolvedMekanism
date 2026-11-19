@@ -23,7 +23,7 @@ import java.util.List;
 @Mixin(ItemBlockLogisticalTransporter.class)
 public abstract class ItemBlockLogisticalTransporterMixin {
 
-    @Shadow public abstract @NotNull TransporterTier getTier();
+    @Shadow(remap = false) public abstract @NotNull TransporterTier getTier();
 
     @Inject(method = "appendHoverText",at = @At("HEAD"),cancellable = true)
     private void evolvedmekanism$changeForCreative(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag, CallbackInfo ci){

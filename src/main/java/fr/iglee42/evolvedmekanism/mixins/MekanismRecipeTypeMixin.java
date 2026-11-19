@@ -28,7 +28,7 @@ import java.util.function.Function;
 @Mixin(MekanismRecipeType.class)
 public abstract class MekanismRecipeTypeMixin {
 
-    @Shadow
+    @Shadow(remap = false)
     protected static <RECIPE extends MekanismRecipe, INPUT_CACHE extends IInputRecipeCache> RecipeTypeRegistryObject<RECIPE, INPUT_CACHE> register(String name, Function<MekanismRecipeType<RECIPE, INPUT_CACHE>, INPUT_CACHE> inputCacheCreator) {
         return null;
     }

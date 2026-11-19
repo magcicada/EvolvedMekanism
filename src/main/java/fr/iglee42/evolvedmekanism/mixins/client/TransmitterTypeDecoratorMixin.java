@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TransmitterTypeDecoratorMixin {
 
     @Mutable
-    @Shadow @Final private ResourceLocation texture;
+    @Shadow(remap = false) @Final private ResourceLocation texture;
 
     @Inject(method = "<init>",at =@At("TAIL"))
     private void evolvedmekanism$changeRlToEM(IBlockProvider block, CallbackInfo ci){

@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 @Mixin(value = BinTier.class,remap = false)
 public class BinTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

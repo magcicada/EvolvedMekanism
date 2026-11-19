@@ -89,11 +89,26 @@ public final class CuriosHelper {
                 return stack;
             }
         }
-        ItemStack held = player.getItemInHand(hand);
-        if (!held.isEmpty() && matcher.test(held)) {
-            return held;
+        if (hand != null) {
+            ItemStack held = player.getItemInHand(hand);
+            if (!held.isEmpty() && matcher.test(held)) {
+                return held;
+            }
         }
         return findFirst(player, matcher);
+    }
+
+    /**
+     * Keep the packet-selected hand/Curios slot authoritative when its item
+     * matches the operation. Only then fall back to the active item menu and
+     * a matching Curio. The caller retains the packet's security checks.
+     */
+    public static ItemStack resolvePacketItem(Player player, ItemStack selected,
+                                              Predicate<ItemStack> matcher) {
+        if (!selected.isEmpty() && matcher.test(selected)) {
+            return selected;
+        }
+        return resolveFromHandOrCurio(player, null, matcher);
     }
 
     public static boolean isAvailableOutsideHand(Player player, ItemStack stack) {

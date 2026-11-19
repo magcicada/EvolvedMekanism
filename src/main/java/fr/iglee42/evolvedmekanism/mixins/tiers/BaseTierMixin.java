@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 @Mixin(value = BaseTier.class,remap = false)
 public class BaseTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

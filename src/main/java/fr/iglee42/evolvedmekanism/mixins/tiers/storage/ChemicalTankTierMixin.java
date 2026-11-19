@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 @Mixin(value = ChemicalTankTier.class,remap = false)
 public class ChemicalTankTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

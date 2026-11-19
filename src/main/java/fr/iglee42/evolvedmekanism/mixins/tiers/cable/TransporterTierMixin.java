@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 @Mixin(value = TransporterTier.class,remap = false)
 public class TransporterTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

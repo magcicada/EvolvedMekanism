@@ -14,12 +14,12 @@ import java.util.List;
 @Mixin(value = TileEntityMekanism.class)
 public class TileEntityMekanismMixin {
 
-    @Redirect(method = "load",at = @At(value = "INVOKE", target = "Lmekanism/api/DataHandlerUtils;readContainers(Ljava/util/List;Lnet/minecraft/nbt/ListTag;)V"))
+    @Redirect(method = "load",at = @At(value = "INVOKE", target = "Lmekanism/api/DataHandlerUtils;readContainers(Ljava/util/List;Lnet/minecraft/nbt/ListTag;)V", remap = false))
     private void em$loadInventoryWithIntSlots(List<? extends INBTSerializable<CompoundTag>> containers, ListTag storedContainers){
         EMDataHandlerUtils.readContainers(containers,storedContainers);
     }
 
-    @Redirect(method = "saveAdditional",at = @At(value = "INVOKE", target = "Lmekanism/api/DataHandlerUtils;writeContainers(Ljava/util/List;)Lnet/minecraft/nbt/ListTag;"))
+    @Redirect(method = "saveAdditional",at = @At(value = "INVOKE", target = "Lmekanism/api/DataHandlerUtils;writeContainers(Ljava/util/List;)Lnet/minecraft/nbt/ListTag;", remap = false))
     private ListTag em$writeInventoryWithIntSlots(List<? extends INBTSerializable<CompoundTag>> containers){
         return EMDataHandlerUtils.writeContainers(containers);
     }

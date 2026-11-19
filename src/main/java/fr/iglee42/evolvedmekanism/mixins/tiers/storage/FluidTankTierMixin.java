@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 @Mixin(value = FluidTankTier.class,remap = false)
 public class FluidTankTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable

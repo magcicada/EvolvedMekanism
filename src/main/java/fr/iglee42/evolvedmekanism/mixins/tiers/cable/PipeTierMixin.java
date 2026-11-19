@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 @Mixin(value = PipeTier.class,remap = false)
 public class PipeTierMixin implements InitializableEnum {
+    @SuppressWarnings("target")
     @Shadow
     @Final
     @Mutable
